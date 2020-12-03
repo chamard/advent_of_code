@@ -1,32 +1,28 @@
 from functools import reduce
 import operator
+from utils.abstract import SolutionsAbstract
 
-TREE = '#'
 
-def get_data():
-    data = list()
-    with open('inputs.txt') as f:
-        for line in f:
-            data.append(line.strip())
-    return data
-
-def number_of_tree(data, right, down):
-    return len([1 for x, line in enumerate(data[0::down]) if line[x*right % len(line)] == TREE])
-
-def main():
-    data = get_data()
-    print(f'Solution part 1: {number_of_tree(data, 3, 1)}') # 569
-
-    slops = [
+class SolutionsDay3(SolutionsAbstract):
+    TREE = '#'
+    SLOPS_PART_2 = [
         (1, 1),
         (3, 1),
         (5, 1),
         (7, 1),
         (1, 2),
-        ]
+    ]
 
-    part_2 = reduce(operator.mul, [number_of_tree(data, *slop) for slop in slops])
-    print(f'Solution part 2: {part_2}') # 346
+    @staticmethod
+    def prepare_data(inputs):
+        return inputs.splitlines()
 
-if __name__ == '__main__':
-    main()
+    @classmethod
+    def number_of_trees(cls, data, right, down):
+        return len([1 for x, line in enumerate(data[0::down]) if line[x*right % len(line)] == cls.TREE])
+
+    def part_1(self):
+        return self.number_of_trees(self.data, 3, 1)
+
+    def part_2(self):
+        return reduce(operator.mul, [self.number_of_trees(self.data, *slop) for slop in self.SLOPS_PART_2])
