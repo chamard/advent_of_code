@@ -12,7 +12,7 @@ def find_triple(target, data):
     for a in data:
         pair = find_pair(target - a, data - set([a]))
         if pair:
-            return a, *pair
+            return (a, *pair)
 
 
 class SolutionsDay1(SolutionsAbstract):
