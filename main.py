@@ -1,14 +1,15 @@
 import glob
 import sys
 
+def get_solution(day):
+    class_name =  f'SolutionsDay{day}'
+    mod = __import__(f'{day}.solutions', fromlist=[class_name])
+    return getattr(mod, class_name)()
+
 def print_solutions(days):
     for day in sorted(days):
-        class_name =  f'SolutionsDay{day}'
-        mod = __import__(f'{day}.solutions', fromlist=[class_name])
-        solution_class = getattr(mod, class_name)
-
-        print(class_name)
-        solution_class().print_solutions()
+        print(f'Day {day}')
+        get_solution(day).print_solutions()
         print()
 
 
