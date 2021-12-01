@@ -14,7 +14,7 @@ def print_solutions(days):
 
 
 if __name__ == '__main__':
-    days = set(glob.glob('[0-9]'))
+    days = set(glob.glob('[0-9][0-9]'))
     input_days = set(sys.argv[1:])
     if input_days:
         days = days.intersection(input_days)
